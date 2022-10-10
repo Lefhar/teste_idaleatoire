@@ -13,7 +13,10 @@ class Aleatoire
         $this->db = Database::connect();
     }
 
-    public function idAleatoire()
+    /**
+     * @return string
+     */
+    public function idAleatoire():string
     {
         $alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
         $caractere = $alphabet[rand(0, 25)] . $alphabet[rand(0, 25)];
@@ -22,15 +25,17 @@ class Aleatoire
         return $caractere . $nombre;
     }
 
-
-    public function getIdaleatoire()
+    /**
+     * @return string
+     */
+    public function getIdaleatoire():string
     {
 
         $id = $this->idAleatoire();
         $requete = $this->db->prepare('select identifiant from idaleatoire where identifiant=?');
          $requete->execute([$id]);
-        if ($requete->rowCount()) {
-            return 'erreur';
+        if ($requete->rowCount()>0) {
+            return 'erreur identifiant déjà en base';
         } else {
             $requete = $this->db->prepare('insert into idaleatoire ( identifiant) value (?)');
             $requete->execute([$id]);
