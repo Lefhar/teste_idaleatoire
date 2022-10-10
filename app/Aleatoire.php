@@ -19,8 +19,7 @@ class Aleatoire
         $caractere = $alphabet[rand(0, 25)] . $alphabet[rand(0, 25)];
 
         $nombre = rand(100, 999);
-        $resultat = $caractere . $nombre;
-        return $resultat;
+        return $caractere . $nombre;
     }
 
 
